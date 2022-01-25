@@ -1,5 +1,5 @@
 {
-  "name": "Aluracord - Matrix (Thiago Magno)",
+  "name": "Chill Chat -  (Thiago Magno)",
   "stickers": [
     "http://2.bp.blogspot.com/-d21tffsTIQo/U_H9QjC69gI/AAAAAAAAKqM/wnvOyUr6a_I/s1600/Pikachu%2B2.gif",
     "https://media1.giphy.com/media/BdghqxNFV4efm/200.gif",
@@ -12,15 +12,15 @@
     "colors": {
       "primary": {
         "050": "#E3F9E5",
-        "100": "#C1EAC5",
-        "200": "#A3D9A5",
-        "300": "#7BC47F",
-        "400": "#57AE5B",
-        "500": "#308090",
-        "600": "#2F8132",
-        "700": "#207227",
-        "800": "#0E5814",
-        "900": "#05400A"
+        "100": "#ffe15c",
+        "200": "#ffd933",
+        "300": "#ffd000",
+        "400": "#ffb700",
+        "500": "#ffa200",
+        "600": "#ff9500",
+        "700": "#ff8800",
+        "800": "#ff7b00",
+        "900": "#ff7f10"
       },
       "neutrals": {
         "000": "#FFFFFF",
@@ -35,6 +35,9 @@
         "800": "#181F25",
         "900": "#101418",
         "999": "#080A0C"
+      },
+      "custom":{
+
       }
     }
   }

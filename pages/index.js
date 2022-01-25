@@ -1,4 +1,5 @@
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
+import React from "react";
 import appConfig from "../config.json";
 
 
@@ -66,16 +67,17 @@ function Title(props) {
   
 //   export default HomePage
 export default function PaginaInicial() {
-    const username = 'Thiago-Magno';
-  
+    // const username = 'Thiago-Magno';
+    const [username, setUsername]= React.useState('Thiago-Magno')
+
     return (
       <>
         <GlobalStyle />
         <Box
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            backgroundColor: appConfig.theme.colors.primary[500],
-            backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+            //backgroundColor: appConfig.theme.colors.primary[800],
+            backgroundImage: 'url(https://i.pinimg.com/originals/a9/32/9b/a9329b6beb4d240a05cef743877b59eb.jpg)',
             backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
           }}
         >
@@ -97,6 +99,14 @@ export default function PaginaInicial() {
             {/* Formulário */}
             <Box
               as="form"
+              //quando da submit num form o comportamento padrão é
+              //de dar refresh o codigo abaixo previne isso
+              onSubmit={function (InfoDoEvento) {
+                console.log("Pagina Enviada!")
+                //previne a pagina de dar refresh
+                InfoDoEvento.preventDefault();
+                
+              }}
               styleSheet={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                 width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
@@ -107,11 +117,22 @@ export default function PaginaInicial() {
                 {appConfig.name}
               </Text>
   
-              <TextField
+              <TextField 
+                value ={username}
+                onChange={function handle(event) {
+                  console.log("usuario digitou", event.target.value);
+                  //Onde ta o valor?
+                  const valor = event.target.value;
+                  //Trocar o valor da variavel
+                  //atraves do REact e avisa quem precisa
+                  setUsername(valor);
+
+
+                }}
                 fullWidth
                 textFieldColors={{
                   neutral: {
-                    textColor: appConfig.theme.colors.neutrals[200],
+                    textColor: appConfig.theme.colors.neutrals[100],
                     mainColor: appConfig.theme.colors.neutrals[900],
                     mainColorHighlight: appConfig.theme.colors.primary[500],
                     backgroundColor: appConfig.theme.colors.neutrals[800],
@@ -123,10 +144,10 @@ export default function PaginaInicial() {
                 label='Entrar'
                 fullWidth
                 buttonColors={{
-                  contrastColor: appConfig.theme.colors.neutrals["000"],
+                  contrastColor: appConfig.theme.colors.neutrals["050"],
                   mainColor: appConfig.theme.colors.primary[500],
-                  mainColorLight: appConfig.theme.colors.primary[400],
-                  mainColorStrong: appConfig.theme.colors.primary[600],
+                  mainColorLight: appConfig.theme.colors.primary[500],
+                  mainColorStrong: appConfig.theme.colors.primary[700],
                 }}
               />
             </Box>
@@ -143,7 +164,7 @@ export default function PaginaInicial() {
                 padding: '16px',
                 backgroundColor: appConfig.theme.colors.neutrals[800],
                 border: '1px solid',
-                borderColor: appConfig.theme.colors.neutrals[999],
+                borderColor: appConfig.theme.colors.neutrals[500],
                 borderRadius: '10px',
                 flex: 1,
                 minHeight: '240px',
@@ -154,7 +175,7 @@ export default function PaginaInicial() {
                   borderRadius: '50%',
                   marginBottom: '16px',
                 }}
-                src={`https://github.com/${username}.png`}
+                src={`https://github.com/${username}.png`|| `https://cdn-icons.flaticon.com/png/512/1144/premium/1144760.png?token=exp=1643131856~hmac=49e66cabaf7d513a943b7f417e7fb47c`}
               />
               <Text
                 variant="body4"
