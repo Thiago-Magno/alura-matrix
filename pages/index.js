@@ -40,9 +40,21 @@ function Title(props) {
 //   export default HomePage
 export default function PaginaInicial() {
     // const username = 'Thiago-Magno';
+    //vem do react para que possa ocorre mudanças de estado
     const [username, setUsername]= React.useState('Thiago-Magno');
+    //é o jeito do next de gerenciar as paginas.
     const roteamento = useRouter();
-
+    function minL() {
+      
+      if (username.length<=2) {
+         return  `https://cdn-icons-png.flaticon.com/512/747/747376.png`
+   
+       
+      }
+      else {
+        return  `https://github.com/${username}.png`
+      }
+    }
     return (
       <>
         
@@ -99,8 +111,7 @@ export default function PaginaInicial() {
                   //Trocar o valor da variavel
                   //atraves do REact e avisa quem precisa
                   setUsername(valor);
-
-
+                  
                 }}
                 fullWidth
                 textFieldColors={{
@@ -148,7 +159,7 @@ export default function PaginaInicial() {
                   borderRadius: '50%',
                   marginBottom: '16px',
                 }}
-                src={`https://github.com/${username}.png`|| `https://cdn-icons.flaticon.com/png/512/1144/premium/1144760.png?token=exp=1643131856~hmac=49e66cabaf7d513a943b7f417e7fb47c`}
+                src={ minL()                }
               />
               <Text
                 variant="body4"
