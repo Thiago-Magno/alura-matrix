@@ -39,9 +39,12 @@ function Title(props) {
   
 //   export default HomePage
 export default function PaginaInicial() {
-    // const username = 'Thiago-Magno';
-    //vem do react para que possa ocorre mudanças de estado
+    
+    
+    //vem do react para que possa ocorrer mudanças de estado no campos
     const [username, setUsername]= React.useState('Thiago-Magno');
+    const [dados, setDados] = React.useState([]);
+    
     //é o jeito do next de gerenciar as paginas.
     const roteamento = useRouter();
     function minL() {
@@ -111,7 +114,7 @@ export default function PaginaInicial() {
                   //Trocar o valor da variavel
                   //atraves do REact e avisa quem precisa
                   setUsername(valor);
-                  
+                   
                 }}
                 fullWidth
                 textFieldColors={{
@@ -159,7 +162,7 @@ export default function PaginaInicial() {
                   borderRadius: '50%',
                   marginBottom: '16px',
                 }}
-                src={ minL()                }
+                src={ minL()}
               />
               <Text
                 variant="body4"
@@ -172,6 +175,8 @@ export default function PaginaInicial() {
               >
                 {username}
               </Text>
+
+
             </Box>
             {/* Photo Area */}
           </Box>
