@@ -1,25 +1,53 @@
 import { Box, Text, TextField, Image, Button } from "@skynexui/components";
+import { createClient } from "@supabase/supabase-js";
 import react from "react";
 import React from "react";
 import appConfig from "../config.json";
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzcyMjMzNywiZXhwIjoxOTU5Mjk4MzM3fQ.es4e2N7HAqCB7-ssbX18ht-joQWqGEeMcJoI-G5detw";
+const SUPABASE_URL = "https://ihafxbtqlmxuxfaeuzwp.supabase.co";
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export default function ChatPage() {
-  const router = useRouter();
-  const username = router.query.username;
+  // const router = useRouter();
+  // const username = router.query.username;
   const [mensagem, setMensagem] = React.useState("");
   const [listaMensagem, setListaMensagem] = React.useState([]);
-  // Sua lógica vai aqui
 
-  // ./Sua lógica vai aqui
+  React.useEffect(() => {
+    supabaseClient
+    .from("mensagens")
+    .select("*")
+    .order('id', {ascending:false})
+    .then(({data}) => {
+      console.log("dados da consulta", data);
+      setListaMensagem(data)
+    });
+  }, []);
+  
+
+
   function handleNovaMensagem(novaMensagem) {
     const mensagem = {
-      id: listaMensagem.length,
-      de: username,
+      // id: listaMensagem.length + 1,
+      de: "Thiago-Magno",
       texto: novaMensagem,
     };
-    setListaMensagem([mensagem, ...listaMensagem]);
-    setMensagem("");
+    supabaseClient
+    .from('mensagens')
+    //tem que ser um objeto com os mesmos campos
+    .insert([
+      mensagem
+    ])
+    .then(({data}) =>{
+        console.log('criando mensagem', data)
+        
+        setListaMensagem([data[0], ...listaMensagem]);
+        
+      })
+      setMensagem("");
+    
   }
   return (
     <Box
@@ -83,7 +111,7 @@ export default function ChatPage() {
             <TextField
               value={mensagem}
               onChange={(event) => {
-                console.log(event);
+                // console.log(event);
                 const valor = event.target.value;
                 setMensagem(valor);
               }}
@@ -110,12 +138,10 @@ export default function ChatPage() {
               type="submit"
               label="Enviar"
               value={mensagem}
-              onClick={(event)=>{
-                   
-                    console.log('envia')
-                    event.preventDefault();
-                    handleNovaMensagem(mensagem);
-
+              onClick={(event) => {
+                // console.log("envia");
+                event.preventDefault();
+                handleNovaMensagem(mensagem);
               }}
               buttonColors={{
                 contrastColor: appConfig.theme.colors.neutrals["050"],
@@ -125,10 +151,10 @@ export default function ChatPage() {
                 //   backgroundImage: 'https://cdn-icons-png.flaticon.com/512/736/736212.png'
               }}
               styleSheet={{
-                bottom:"4px",
+                bottom: "4px",
                 padding: "15px 8px 10px",
               }}
-              disabled={mensagem?false : true}
+              disabled={mensagem ? false : true}
             />
           </Box>
         </Box>
@@ -162,7 +188,7 @@ function Header() {
 }
 
 function MessageList(props) {
-  console.log("MessageList", props);
+  // console.log("MessageList", props);
   return (
     <Box
       tag="ul"
